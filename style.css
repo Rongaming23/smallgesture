@@ -29,27 +29,22 @@ body {
   color: var(--text);
 }
 
-/* Her-crush background collage: Iron Man + Shah Rukh Khan + Jungkook.
-   The dark overlay keeps all study controls readable. */
+/* Full-site crush collage background. The uploaded collage is used locally so it
+   stays available even when the phone is offline after the page is loaded. */
 body::before {
   content: "";
   position: fixed;
-  inset: -5%;
+  inset: 0;
   z-index: -2;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(4, 7, 15, .72), rgba(4, 7, 15, .88)),
-    url("https://www.xtrafondos.com/wallpapers/vertical/iron-man-arte-12643.jpg"),
-    url("https://i.pinimg.com/736x/6f/ea/86/6fea860bbed963dd6851b602e924a743--shahrukh-khan-kajol.jpg"),
-    url("https://file.sportsseoul.com/news/cms/2025/08/16/news-p.v1.20250816.4c3fdfefc41c4f30bdec976cd1fa54c3_P1.jpg");
+    linear-gradient(rgba(5, 8, 18, .28), rgba(5, 8, 18, .48)),
+    url("assets/crush-collage.jpg");
   background-repeat: no-repeat;
-  background-size: cover, 38% 120%, 38% 120%, 38% 120%;
-  background-position: center, left -8% center, right -8% center, center center;
-  background-blend-mode: normal, screen, normal, screen;
-  filter: saturate(.78) contrast(.92);
-  opacity: .42;
-  transform: scale(1.05);
-  animation: crushDrift 22s ease-in-out infinite alternate;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(.92) contrast(.96);
+  transform: scale(1.02);
 }
 
 body::after {
@@ -59,15 +54,8 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 15% 35%, rgba(255, 45, 45, .10), transparent 25%),
-    radial-gradient(circle at 50% 60%, rgba(124, 92, 255, .10), transparent 28%),
-    radial-gradient(circle at 85% 30%, rgba(53, 200, 255, .10), transparent 25%),
-    linear-gradient(rgba(8,12,23,.30), rgba(8,12,23,.60));
-}
-
-@keyframes crushDrift {
-  from { transform: scale(1.05) translate3d(-1%, 0, 0); }
-  to { transform: scale(1.09) translate3d(1%, -1%, 0); }
+    linear-gradient(rgba(6, 9, 18, .18), rgba(6, 9, 18, .38)),
+    radial-gradient(circle at 50% 50%, rgba(8, 12, 23, .08), rgba(8, 12, 23, .42));
 }
 
 button {
@@ -137,7 +125,9 @@ h1 {
 .player-panel,
 .timer-panel,
 .lectures-panel {
-  background: linear-gradient(145deg, rgba(20,29,48,.96), rgba(11,17,30,.96));
+  background: linear-gradient(145deg, rgba(13,20,36,.66), rgba(7,12,24,.58));
+  backdrop-filter: blur(7px) saturate(1.08);
+  -webkit-backdrop-filter: blur(7px) saturate(1.08);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   border-radius: 20px;
@@ -227,11 +217,7 @@ h1 {
 .status-badge,
 #lectureCountLabel {
   color: var(--muted);
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--border);
-  padding: 7px 11px;
-  border-radius: 999px;
-  font-size: 12px;
+  align-items: center;
 }
 
 .status-badge.completed {
@@ -243,7 +229,9 @@ h1 {
   margin-top: 20px;
   overflow: hidden;
   border-radius: 15px;
-  background: #03050a;
+  background:
+    linear-gradient(rgba(3,5,10,.48), rgba(3,5,10,.62)),
+    url("assets/crush-collage.jpg") center / cover no-repeat;
   aspect-ratio: 16 / 9;
   border: 1px solid var(--border);
 }
@@ -263,7 +251,8 @@ video {
   place-items: center;
   text-align: center;
   padding: 20px;
-  background: radial-gradient(circle, #17223a, #050810);
+  background: linear-gradient(rgba(5,8,18,.42), rgba(5,8,18,.58));
+  backdrop-filter: blur(1px);
 }
 
 .video-placeholder.visible {
@@ -316,14 +305,18 @@ video {
 
 .primary-btn {
   color: white;
-  background: linear-gradient(135deg, var(--accent), #5b8cff);
+  background: linear-gradient(135deg, rgba(124,92,255,.82), rgba(91,140,255,.70));
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
 }
 
 .secondary-btn,
 .timer-presets button {
   color: var(--text);
-  background: rgba(255,255,255,.06);
-  border: 1px solid var(--border);
+  background: rgba(8,14,28,.46);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .danger-btn {
@@ -487,6 +480,21 @@ video {
   }
 }
 
+
+@media (max-width: 640px) {
+  body::before {
+    background-size: auto 100%;
+    background-position: center top;
+  }
+
+  .stat-card,
+  .progress-panel,
+  .player-panel,
+  .timer-panel,
+  .lectures-panel {
+    background: linear-gradient(145deg, rgba(9,15,29,.68), rgba(6,11,22,.60));
+  }
+}
 @media (max-width: 620px) {
   .topbar {
   position: relative;
