@@ -1,0 +1,543 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #080c17;
+  --panel: #111827;
+  --panel-2: #0d1424;
+  --border: rgba(255,255,255,.08);
+  --text: #f5f7fb;
+  --muted: #9aa6ba;
+  --accent: #7c5cff;
+  --accent-2: #35c8ff;
+  --success: #38d996;
+  --danger: #ff5f6d;
+  --shadow: 0 18px 50px rgba(0,0,0,.25);
+}
+
+body {
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(124,92,255,.15), transparent 32%),
+    radial-gradient(circle at 90% 20%, rgba(53,200,255,.10), transparent 28%),
+    var(--bg);
+  color: var(--text);
+}
+
+/* Her-crush background collage: Iron Man + Shah Rukh Khan + Jungkook.
+   The dark overlay keeps all study controls readable. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -5%;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(4, 7, 15, .72), rgba(4, 7, 15, .88)),
+    url("https://www.xtrafondos.com/wallpapers/vertical/iron-man-arte-12643.jpg"),
+    url("https://i.pinimg.com/736x/6f/ea/86/6fea860bbed963dd6851b602e924a743--shahrukh-khan-kajol.jpg"),
+    url("https://file.sportsseoul.com/news/cms/2025/08/16/news-p.v1.20250816.4c3fdfefc41c4f30bdec976cd1fa54c3_P1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover, 38% 120%, 38% 120%, 38% 120%;
+  background-position: center, left -8% center, right -8% center, center center;
+  background-blend-mode: normal, screen, normal, screen;
+  filter: saturate(.78) contrast(.92);
+  opacity: .42;
+  transform: scale(1.05);
+  animation: crushDrift 22s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 35%, rgba(255, 45, 45, .10), transparent 25%),
+    radial-gradient(circle at 50% 60%, rgba(124, 92, 255, .10), transparent 28%),
+    radial-gradient(circle at 85% 30%, rgba(53, 200, 255, .10), transparent 25%),
+    linear-gradient(rgba(8,12,23,.30), rgba(8,12,23,.60));
+}
+
+@keyframes crushDrift {
+  from { transform: scale(1.05) translate3d(-1%, 0, 0); }
+  to { transform: scale(1.09) translate3d(1%, -1%, 0); }
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  width: min(1400px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 42px 0 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--accent-2);
+  font-weight: 800;
+}
+
+h1, h2, h3, p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.header-actions,
+.player-controls,
+.timer-buttons,
+.timer-presets {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(1400px, calc(100% - 32px));
+  margin: 0 auto 60px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.stat-card,
+.progress-panel,
+.player-panel,
+.timer-panel,
+.lectures-panel {
+  background: linear-gradient(145deg, rgba(20,29,48,.96), rgba(11,17,30,.96));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+}
+
+.stat-card {
+  padding: 22px;
+}
+
+.stat-card span,
+.small-label {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+
+.stat-card strong {
+  font-size: 25px;
+}
+
+.progress-panel {
+  margin-top: 14px;
+  padding: 22px;
+}
+
+.progress-heading,
+.section-heading,
+.player-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.progress-heading h2,
+.section-heading h2 {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.progress-heading p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 13px;
+}
+
+#progressBadge {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.progress-track,
+.mini-track {
+  overflow: hidden;
+  height: 9px;
+  background: rgba(255,255,255,.06);
+  border-radius: 999px;
+}
+
+.progress-track {
+  margin-top: 18px;
+}
+
+.progress-bar,
+.mini-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: inherit;
+  transition: width .3s ease;
+}
+
+.content-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(300px, .85fr);
+  gap: 14px;
+}
+
+.player-panel,
+.timer-panel,
+.lectures-panel {
+  padding: 22px;
+}
+
+.status-badge,
+#lectureCountLabel {
+  color: var(--muted);
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.status-badge.completed {
+  color: var(--success);
+}
+
+.video-wrap {
+  position: relative;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #03050a;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #03050a;
+}
+
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  text-align: center;
+  padding: 20px;
+  background: radial-gradient(circle, #17223a, #050810);
+}
+
+.video-placeholder.visible {
+  display: grid;
+}
+
+.video-placeholder p {
+  color: var(--muted);
+  max-width: 430px;
+}
+
+.play-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(124,92,255,.18);
+  border: 1px solid rgba(124,92,255,.45);
+  color: #fff;
+  font-size: 24px;
+}
+
+.player-footer {
+  margin: 17px 0;
+}
+
+.player-footer > div {
+  flex: 1;
+}
+
+#lectureProgressText {
+  min-width: 42px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn,
+.timer-presets button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.primary-btn {
+  color: white;
+  background: linear-gradient(135deg, var(--accent), #5b8cff);
+}
+
+.secondary-btn,
+.timer-presets button {
+  color: var(--text);
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+}
+
+.danger-btn {
+  color: #ffb1b8;
+  background: rgba(255,95,109,.08);
+  border: 1px solid rgba(255,95,109,.18);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.danger-btn:hover,
+.timer-presets button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
+
+.timer-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-display {
+  margin: 35px 0 6px;
+  text-align: center;
+  font-size: clamp(54px, 7vw, 84px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.timer-mode {
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.timer-buttons {
+  justify-content: center;
+}
+
+.timer-presets {
+  margin-top: 18px;
+  justify-content: center;
+}
+
+.timer-presets button {
+  padding: 8px 11px;
+  font-size: 12px;
+}
+
+.tip-box {
+  margin-top: auto;
+  padding: 16px;
+  border-radius: 13px;
+  background: rgba(124,92,255,.08);
+  border: 1px solid rgba(124,92,255,.16);
+}
+
+.tip-box p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lectures-panel {
+  margin-top: 14px;
+}
+
+.lecture-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.lecture-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.025);
+  transition: .2s ease;
+}
+
+.lecture-item:hover,
+.lecture-item.active {
+  background: rgba(124,92,255,.08);
+  border-color: rgba(124,92,255,.28);
+}
+
+.lecture-number {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.lecture-item.completed .lecture-number {
+  background: rgba(56,217,150,.12);
+  color: var(--success);
+}
+
+.lecture-title {
+  margin: 0 0 4px;
+  font-weight: 750;
+}
+
+.lecture-file {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.lecture-status {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.lecture-status.done {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translate(-50%, 20px);
+  padding: 12px 17px;
+  border-radius: 10px;
+  background: #1c263a;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s ease;
+  z-index: 20;
+  font-size: 13px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .topbar {
+  position: relative;
+  z-index: 2;
+    padding-top: 28px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-card strong {
+    font-size: 20px;
+  }
+
+  .player-panel,
+  .timer-panel,
+  .lectures-panel,
+  .progress-panel {
+    padding: 16px;
+  }
+
+  .player-controls button {
+    flex: 1;
+  }
+
+  .lecture-item {
+    grid-template-columns: auto 1fr;
+  }
+
+  .lecture-status {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 390px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
